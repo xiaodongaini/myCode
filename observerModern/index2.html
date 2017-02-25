@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>模块间通信</title>
+	<link rel="stylesheet" href="">
+	<script src="index3.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<button id="count">点我</button>
+	<div id="show"></div>
+</body>
+<script type="text/javascript">
+	var a = (function(){
+		var count = 0;
+		var button = document.getElementById('count');
+		button.onclick = function(){
+			Event.trigger('add',count++);
+		}
+	})();
+
+	var b = (function(){
+		var div = document.getElementById('show');
+		Event.listen('add',function(count){
+			div.innerHTML = count;
+		});
+	})();
+</script>
+</html>
